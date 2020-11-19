@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Guide pour mise en place dans un environnement PHP - &lsqb;ICI&rsqb;&lpar;&lt;&period;&sol;Proc&eacute;dure pour PHP&period;html&gt;&rpar;</title>
+        <style>
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <h2 id="guide-pour-mise-en-place-dans-un-environnement-php---ici">Guide pour mise en place dans un environnement PHP - <a href="./Proc%C3%A9dure%20pour%20PHP.html">ICI</a></h2>
+<h1 id="guide-pour-lutilisation-dapache-directory-studio-">Guide pour l'utilisation d'Apache Directory Studio :</h1>
+<p><strong>Configuration de l'environnement de travail :</strong></p>
+<p><em>Apache Directory Studio :</em></p>
+<p>Il faut récupérer soit l'installation soit la version portable :</p>
+<blockquote>
+<p><code>L:\MP\1. Solutions métiers\Pôle CAC\OpenLDAP - Dev Interne - Annuaire OpenLDAP\090. Déploiement-Installation\Périmètre de déploiement\</code></p>
+</blockquote>
+<p>OU</p>
+<p>En suivant le lien suivant <a href="https://directory.apache.org/studio/download/download-windows.html">Apache Directory Studio</a></p>
+<hr>
+<p>Une fois l'instation terminée, il faut lancer Apache Directory Studio.</p>
+<p>N'oubliez pas d'ouvrir le fichier de configuration, on va en avoir besoin ...</p>
+<p><em>Mais où est-il ?!</em></p>
+<p>Pas de panique !!</p>
+<p>Il est là --&gt;</p>
+<blockquote>
+<p><code>L:\MP\1. Solutions métiers\Pôle CAC\OpenLDAP - Dev Interne - Annuaire OpenLDAP\090. Déploiement-Installation\Périmètre de déploiement\configuration.txt</code></p>
+</blockquote>
+<p>Il faut alors déclarer une nouvelle connexion :</p>
+<p><img src="file:///l:\MP\1. Solutions métiers\Pôle CAC\OpenLDAP - Dev Interne - Annuaire OpenLDAP\110. Exploitation\Procédures\captures\install.png" alt="installation"></p>
+<ol>
+<li>Le nom de la connexion (<em><strong>UnSuperNomPourCetteConnexionOpenLDAP</strong></em>)</li>
+<li>Le lien du serveur <em><strong>(epicea-test</strong></em>)</li>
+<li>Puis, Suivant</li>
+</ol>
+<p><img src="file:///l:\MP\1. Solutions métiers\Pôle CAC\OpenLDAP - Dev Interne - Annuaire OpenLDAP\110. Exploitation\Procédures\captures\config.png" alt="config"></p>
+<ol>
+<li>Bien séléctionner Authentification simple</li>
+<li>Le nom d'utilisateur (<em><strong>uid=lecteurLDAP,ou=Comptes fonctionnels,ou=users,dc=allier,dc=fr</strong></em>)</li>
+<li>Le mot de passe (<em><strong>Lecteur-CD03</strong></em>)</li>
+<li>Puis, Terminer</li>
+</ol>
+<hr>
+<p><strong>Navigation dans la structure :</strong></p>
+<p>En dépliant les petits chevrons (sous <strong>ou=users</strong>), on trouve les différentes structures de notre organigramme hiérarchique.</p>
+<p><img src="file:///l:\MP\1. Solutions métiers\Pôle CAC\OpenLDAP - Dev Interne - Annuaire OpenLDAP\110. Exploitation\Procédures\captures\description.png" alt="description"></p>
+<ol>
+<li>Une structure de type <strong>allierOU</strong></li>
+<li>Un poste de type <strong>allierPoste</strong></li>
+<li>Un agent de type <strong>allierUser</strong></li>
+</ol>
+<p><em>Vous pouvez aller voir le schéma si vous ne me croyez pas</em> 😉</p>
+<blockquote>
+<p><code>L:\MP\1. Solutions métiers\Pôle CAC\OpenLDAP - Dev Interne - Annuaire OpenLDAP\090. Déploiement-Installation\Livraisons-Sources\Schémas\Dernière version\allier.schema</code></p>
+</blockquote>
+<hr>
+<p><strong>Passons aux recherches :</strong></p>
+<ul>
+<li>Création d'une nouvelle recherche :</li>
+</ul>
+<p><img src="file:///l:\MP\1. Solutions métiers\Pôle CAC\OpenLDAP - Dev Interne - Annuaire OpenLDAP\110. Exploitation\Procédures\captures\search.png" alt="recherche"></p>
+<ol>
+<li>Clic droit sur <strong>Recherches</strong></li>
+<li><strong>Nouveau</strong></li>
+<li><strong>Nouvelle recherche...</strong></li>
+</ol>
+<p><em>Devais-je vraiement présenter cette étape ...</em></p>
+<ul>
+<li>Création de la <strong>vraie</strong> recherche - <strong>Tous les agents de chez MP</strong> :</li>
+</ul>
+<p><img src="file:///l:\MP\1. Solutions métiers\Pôle CAC\OpenLDAP - Dev Interne - Annuaire OpenLDAP\110. Exploitation\Procédures\captures\search_mp.png" alt="recherche_mp"></p>
+<ol>
+<li>Le nom de la recherche (<em><strong>TousLesAgentsDeChezMP</strong></em>) si on ne met rien, il utilse la date et heure de création ... pas simple pour s'y retrouver quand on en a beaucoup ...</li>
+<li>La base de recherche est le niveau où débute la recherche (<em><strong>ou=users,dc=allier,dc=fr</strong></em>)</li>
+<li>Le filtre mérite un peu plus d'explication :
+<img src="file:///l:\MP\1. Solutions métiers\Pôle CAC\OpenLDAP - Dev Interne - Annuaire OpenLDAP\110. Exploitation\Procédures\captures\filtre.png" alt="filtre"></li>
+</ol>
+<p>On demande ici les entrées avec la valeur <strong>allierUser</strong> dans l'attribut <em>objectClass</em>  <strong>ET</strong>  la valeur <strong>Méthodes et projets</strong> dans l'attribut <em>allierService</em></p>
+<p>On peut faire des associations de filtres avec les opératieurs <strong>AND</strong> / <strong>OR</strong> / <strong>NOT</strong> :</p>
+<blockquote>
+<ul>
+<li><strong>AND</strong> ==&gt; (&amp; )</li>
+<li><strong>OR</strong> ==&gt; (| )</li>
+<li><strong>NOT</strong> ==&gt; (! )</li>
+</ul>
+</blockquote>
+<ol start="4">
+<li>Les attributs retournés sont les champs que l'on veut voir.</li>
+<li>Ce qui nous donne :
+<img src="file:///l:\MP\1. Solutions métiers\Pôle CAC\OpenLDAP - Dev Interne - Annuaire OpenLDAP\110. Exploitation\Procédures\captures\result.png" alt="result"></li>
+</ol>
+<p>On va faire une autre recherche :</p>
+<p>On veut, tous les agents de MP (<em>Quoi ! Encore ?!</em>),</p>
+<p>Attends !</p>
+<p>On veut, tous les agents de MP <strong>sans le responsable</strong></p>
+<p><em>Alors, une idée ?</em></p>
+<p><em>Je dis rien mais, on l'a vu plus haut !</em></p>
+<p><img src="file:///l:\MP\1. Solutions métiers\Pôle CAC\OpenLDAP - Dev Interne - Annuaire OpenLDAP\110. Exploitation\Procédures\captures\filtre_sans_pg.png" alt="filtre_sans_pg"></p>
+<p>Si on ne connais pas le matricule, on peut aussi faire ceci :</p>
+<blockquote>
+<p>(!(sn=GRAS))</p>
+</blockquote>
+<p>Ce qui nous donne :</p>
+<p><img src="file:///l:\MP\1. Solutions métiers\Pôle CAC\OpenLDAP - Dev Interne - Annuaire OpenLDAP\110. Exploitation\Procédures\captures\result_sans_pg.png" alt="result_sans_pg"></p>
+<p>N'hésitez pas à tester et revenir vers moi pour toute question 😉</p>
+
+    </body>
+    </html>
